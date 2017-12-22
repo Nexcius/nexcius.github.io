@@ -1,36 +1,66 @@
----
-layout: default
----
+<html>
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-36193529-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'UA-36193529-1');
+        </script>
+            
+        <link href="https://fonts.googleapis.com/css?family=Orbitron:400,900" rel="stylesheet">
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div id="container">
+            <h1 id="title"><img src="logo.png" /> nexcius</h1>
+            <div id="twitch-embed"></div>
 
-<div class="home">
+            <div id="subtitles">
+                <div>
+                    <h3>YOUTUBE</h3>
+                    <a href="http://youtube.com/nexcius" target="blank">youtube.com/nexcius</a>
+                </div>
+                <div>
+                    <h3>TWITTER</h3>
+                    <a href="http://twitter.com/nexcius" target="blank">twitter.com/nexcius</a>
+                </div>
+                <div>
+                    <h3>INSTAGRAM</h3>
+                    <a href="http://instagram.com/nexcius" target="blank">instagram.com/nexcius</a>
+                </div>
+            </div>
+        </div>
 
-  <ul class="post-list">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+        <div class="clearfix"></div>
 
-        <h2>
-          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-        </h2>
-        <p>
-          {{ post.excerpt }}
+        <div id="notice">
+            Copyright &copy; Nexcius.net
+        </div>
+            
+        <script>
+            function adjustVideoHeight() {
+                var element = document.getElementById("twitch-embed");
+                var newHeight = element.offsetWidth * (9/16);
+                element.style.height = newHeight;
+            }
 
-          {% capture content_words %} 
-            {{ post.content | number_of_words }} 
-          {% endcapture %} 
-          {% capture excerpt_words %} 
-            {{ post.excerpt | number_of_words }} 
-          {% endcapture %} 
+            window.onresize = function() {
+                adjustVideoHeight();
+            };
+            adjustVideoHeight();
+        </script>
 
-          {% if excerpt_words != content_words %}
-            <p>&raquo; <a href="{{ post.url }}#read-more">Continue reading</a>
-            </p>
-          {% endif %}
-        </p>
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+        <script src="https://embed.twitch.tv/embed/v1.js"></script>
+        <script type="text/javascript">
+            new Twitch.Embed("twitch-embed", {
+                width: "100%",
+                height: "100%",
+                channel: "nexcius",
+                layout: "video",
+                muted: true,
+                theme: "dark"
+            }); 
+        </script>
+    </body>
+</html>
